@@ -2,7 +2,7 @@
   "name": "my-classmates",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://your-github-username.github.io/my-classmates",
+  "homepage": "https://tiffany9056.github.io/my-classmates",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
