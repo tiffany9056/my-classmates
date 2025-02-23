@@ -28,17 +28,23 @@ function App() {
 export default App;
 
 /*
+Bootstrap classes and CSS properties
+Bootstrap Grid System
 xs={12} → Each card takes full width on small screens.
 md={8} → Takes 8/12 (about 67%) of the screen on medium screens.
 lg={6} → Takes 6/12 (half the screen width) on large screens.
-mb-3	Margin-bottom: 1rem (16px) → Adds space below the element.
-p-1	Padding: 0.25rem (4px) → Adds small inner spacing inside the element.
-bg-light	Background color: Light gray (#f8f9fa) 
-width: "100%"	Makes the element take up the full width of its container.
-wordBreak: "break-word"	Forces long words to break into a new line if needed, preventing overflow.
-maxWidth: "70%"	Limits the width to 70% of the parent container, preventing it from stretching too wide.
-d-flex	Enables flexbox for the <div>.
-justify-content-between	Distributes elements evenly: one on the left, one on the right.
-align-items-center	Vertically centers the elements inside the div.
+Bootstrap Spacing Classes
+mb-3	Margin-bottom: 1rem (16px) Adds space below the element.
 mt-4	Extra-large margin-top	1.5rem	24px
+p-1	Padding: 0.25rem (4px) Adds small inner spacing inside the element.
+Background & Width
+bg-light Background color: Light gray (#f8f9fa) 
+width: "100%""	Makes the element take up the full width of its container.
+maxWidth: "70%"	Limits the width to 70% of the parent container, preventing it from stretching too wide.
+Text & Word Wrapping
+wordBreak: "break-word"	Forces long words to break into a new line if needed, preventing overflow.
+Flexbox Properties
+d-flex Enables flexbox for the <div>.
+justify-content-between	Distributes elements evenly: one on the left, one on the right.
+align-items-center Vertically centers the elements inside the div.
 */
