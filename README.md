@@ -1,4 +1,4 @@
-# ICSI518-Software Engineering Assignment 2: My Classmates App
+# Assignment 2: My Classmates App
 ## The GitHub page link of My Classmates App webpage
 https://tiffany9056.github.io/my-classmates/
 
