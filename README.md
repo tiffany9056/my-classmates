@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# ICSI518-Software Engineering Assignment 2: My Classmates App
+## The GitHub page link of My Classmates App webpage
+https://tiffany9056.github.io/my-classmates/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Description
+This is a web application with ReactJS that will displays a list of classmates, their favorite foods, and colors. Users can clicking the Like button of the classmate.
 
-## Available Scripts
+## Generative AI Usage in This Project
+- **How I used it:** Generative AI was used 90% to my My Classmates App deployment, since I did not learn React before. However, I have write the code comment and their meanings, and also some Bootstrap Classes meanings.
+- **AI-generated vs. Own Code:** The main logic and coding were by Generative AI, however, since it didnot generate the perfict webpage I expect, some detail styling and the Bootstrap class I modify and change by myself, while AI helped with debugging.
 
-In the project directory, you can run:
+## Technologies I Used
+- **ReactJS** for building components
+- **Bootstrap** for responsive styling
+- **GitHub Pages** for hosting
 
-### `npm start`
+## Project Structure
+```
+my-classmates/
+├─ src/                       # React source code
+    ├─ components/            # Reusable React components
+        ├── ClassMateCard.js  # Classmate card component
+        ├── PeopleData.js     # Data file for classmates
+    ├── App.js                # Main React component
+    ├── index.js              # Entry point for the app
+├─ public/                    # Static assets
+├─ build/                     # Deployment files (auto-generated)
+├── package.json              # Dependencies and scripts
+├── package-lock.json         # Lock file for dependencies
+└── README.md                 # Project documentation
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## How I Install
+1. Install Node.js and npm:
+   ```bash
+   ## Install Node.js and npm 
+   brew install node
+   ## Verify installation
+   node -v
+   npm -v
+   ```
+2. Clone the repository:
+   ```bash
+   git clone https://github.com/tiffany9056/my-classmates.git
+   ```
+3. Install required npm packages
+   ```bash
+   ## Install Project Dependencies
+   npm install
+   npm install bootstrap react-bootstrap
+   ```
+4. Install GitHub Pages package
+   ```bash
+   npm install gh-pages --save-dev
+   ```
+6. Modify package.json:
+   ```md
+   ## Add a "homepage" field, ensures the app is deployed to the correct URL.:
+   "homepage": "https://tiffany9056.github.io/my-classmates" 
+   ## Modify "scripts":
+   # Automatically builds the project before deployment.
+   # Pushes the build/ folder to the gh-pages branch.
+   "predeploy": "npm run build", 
+   "deploy": "gh-pages -d build" 
+   ```
+7. Start the Development Server (For Local Testing):
+   ```sh
+   npm start
+   ```
+8. Deploy to GitHub Pages:
+   ```sh
+   npm run deploy
+   ```
