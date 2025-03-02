@@ -1,22 +1,90 @@
 // Import modules from React, Bootstrap, and external files
-import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import People from "./components/PeopleData"; // Import People Array
+// import React from "react";
+// import { Container, Row, Col } from "react-bootstrap";
+// import PeopleData from "./components/PeopleData"; // Import People Array
+// import ClassmateCard from "./components/ClassMateCard"; // Import ClassMateCard component
+
+import React, {useState} from "react";
+import { Container, Row, Col, Form, Button, Alert} from "react-bootstrap";
+import PeopleData from "./components/PeopleData"; // Import People Array
 import ClassmateCard from "./components/ClassMateCard"; // Import ClassMateCard component
 
- // Main App Component
+// Main App Component
 function App() {
+  // Use state to manage people data and form inputs
+  const [people, setPeople] = useState(PeopleData);
+  const [name, setName] = useState("");
+  const [favoriteColor, setFavoriteColor] = useState("");
+  const [favoriteFood, setFavoriteFood] = useState("");
+  const [error, setError] = useState("");
+
+  // Function to handle form submission
+  const handleAddPerson = (e) => {
+    e.preventDefault();
+
+    if (!name || !favoriteColor || !favoriteFood) {
+      setError("All fields are required!");
+      return;
+    }
+
+    // Add new classmate to the list
+    const newPerson = { name, favoriteColor, favoriteFood };
+    setPeople([...people, newPerson]);
+
+    // Clear the input fields and error message
+    setName("");
+    setFavoriteColor("");
+    setFavoriteFood("");
+    setError("");
+  };
+
+  // return (
+  //   <Container className="mt-4">
+  //     {/* Page Heading */}
+  //     <h2 className="text-left">My Classmates</h2>
+
+  //     {/* Create a Bootstrap Row for layout */}
+  //     <Row className="justify-content-center">
+  //       {/* Map through the People array and generate a card for each classmate */}
+  //       {PeopleData.map((person, index) => (
+  //         <Col key={index} xs={12}>
+  //           {/* Render the ClassmateCard component for each person */}
+  //           <ClassmateCard person={person} />
+  //         </Col>
+  //       ))}
+  //     </Row>
+  //   </Container>
+  // );
   return (
     <Container className="mt-4">
       {/* Page Heading */}
       <h2 className="text-left">My Classmates</h2>
 
-      {/* Create a Bootstrap Row for layout */}
+      {/* Form to Add New Classmate */}
+      <Form onSubmit={handleAddPerson} className="mb-4 p-3 border rounded bg-light">
+        {error && <Alert variant="danger">{error}</Alert>}
+        <Form.Group controlId="name">
+          <Form.Label>Name:</Form.Label>
+          <Form.Control type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        </Form.Group>
+
+        <Form.Group controlId="favoriteColor" className="mt-2">
+          <Form.Label>Favorite Color:</Form.Label>
+          <Form.Control type="text" value={favoriteColor} onChange={(e) => setFavoriteColor(e.target.value)} />
+        </Form.Group>
+
+        <Form.Group controlId="favoriteFood" className="mt-2">
+          <Form.Label>Favorite Food:</Form.Label>
+          <Form.Control type="text" value={favoriteFood} onChange={(e) => setFavoriteFood(e.target.value)} />
+        </Form.Group>
+
+        <Button type="submit" variant="primary" className="mt-3">Add Classmate</Button>
+      </Form>
+
+      {/* Display Classmates */}
       <Row className="justify-content-center">
-        {/* Map through the People array and generate a card for each classmate */}
-        {People.map((person, index) => (
+        {people.map((person, index) => (
           <Col key={index} xs={12}>
-            {/* Render the ClassmateCard component for each person */}
             <ClassmateCard person={person} />
           </Col>
         ))}
@@ -27,6 +95,20 @@ function App() {
 
 export default App;
 
+/*
+<Container> in App.js
+className="mt-4" → Adds margin-top for better spacing.
+
+Form Styling in App.js
+className="mb-4 p-3 border rounded bg-light"
+mb-4 → Adds bottom margin for spacing between form and list.
+p-3 → Adds padding inside the form.
+border rounded → Adds a border and rounded corners.
+bg-light → Sets a light gray background.
+
+Row className="justify-content-center" → Centers the classmates list.
+
+*/
 /*
 Bootstrap classes and CSS properties
 Bootstrap Grid System
