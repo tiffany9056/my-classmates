@@ -1,9 +1,15 @@
-# Assignment 2: My Classmates App
+# Assignment 3: My Classmates App
 ## The GitHub page link of My Classmates App webpage
 https://tiffany9056.github.io/my-classmates/
 
 ## Project Description
-This is a web application with ReactJS that will displays a list of classmates, their favorite foods, and colors. Users can clicking the Like button of the classmate.
+<!-- This is a web application with ReactJS that will displays a list of classmates, their favorite foods, and colors. Users can clicking the Like button of the classmate. -->
+This is a web application with ReactJS that allows users to **add, edit, delete, and like classmates**.
+
+Features:
+- **AG Grid table** for managing classmates with search and sorting functionality.
+- **Bootstrap Cards** for visually displaying classmates.
+- **React Hooks (`useState`, `useEffect`)** for managing dynamic interactions.
 
 ## Generative AI Usage in This Project
 - **How I used it:** Generative AI was used 90% to my My Classmates App deployment, since I did not learn React before. However, I have write the code comment and their meanings, and also some Bootstrap Classes meanings.
@@ -13,6 +19,10 @@ This is a web application with ReactJS that will displays a list of classmates, 
 - **ReactJS** for building components
 - **Bootstrap** for responsive styling
 - **GitHub Pages** for hosting
+- **AG Grid** for managing classmates
+
+## Data-table libraries I Used
+**AG Grid** provides strong capabilities including sorting, filtering, pagination, and real-time updates. It interacts nicely with React, has adjustable column rendering, and can handle huge datasets. AG Grid is also a strong option for effectively showing classmate profiles since it offers good capability including row grouping, exporting, and customizable cells.
 
 ## Project Structure
 ```
@@ -20,6 +30,7 @@ my-classmates/
 ├─ src/                       # React source code
     ├─ components/            # Reusable React components
         ├── ClassMateCard.js  # Classmate card component
+        ├── ClassMateTable.js # Classmate table (AG Grid) component
         ├── PeopleData.js     # Data file for classmates
     ├── App.js                # Main React component
     ├── index.js              # Entry point for the app
@@ -48,6 +59,8 @@ my-classmates/
    ## Install Project Dependencies
    npm install
    npm install bootstrap react-bootstrap
+   ## Install AG Grid
+   npm install ag-grid-react ag-grid-community
    ```
 4. Install GitHub Pages package
    ```bash
