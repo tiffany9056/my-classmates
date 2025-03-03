@@ -3,7 +3,7 @@ import React from "react";
 import { Card, Button } from "react-bootstrap";
 
 // Component to display each classmate's details
-function ClassmateCard({ person, likes, onLike}) {
+function ClassmateCard({ person, onLike}) {
   return (
     <Card className="mb-3 p-1 bg-light" style={{ width: "100%", wordBreak: "break-word", maxWidth: "100%" }}>
       <Card.Body>

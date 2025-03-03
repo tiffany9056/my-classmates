@@ -99,13 +99,14 @@ function App() {
 
         <Button type="submit" variant="primary" className="mt-3">Add Classmate</Button>
       </Form>
+
       {/* Display People Data as Cards */}
       <Row className="justify-content-center">
         {people.map((person, index) => (
           <Col key={index} xs={12}>
             <ClassmateCard
               person={person} 
-              likes={person.likes} 
+              // likes={person.likes} 
               onLike={() => handleLike(person.id)} 
             />
           </Col>
