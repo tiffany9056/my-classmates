@@ -1,67 +1,86 @@
 // Import modules from React, Bootstrap, and external files
-// import React from "react";
-// import { Container, Row, Col } from "react-bootstrap";
-// import PeopleData from "./components/PeopleData"; // Import People Array
-// import ClassmateCard from "./components/ClassMateCard"; // Import ClassMateCard component
-
-import React, {useState} from "react";
-import { Container, Row, Col, Form, Button, Alert} from "react-bootstrap";
+// import React from "react"; //HW3-L1
+import React, {useState} from "react"; //HW3-L2
+// import { Container, Row, Col } from "react-bootstrap"; //HW3-L1
+// import { Container, Row, Col, Form, Button, Alert} from "react-bootstrap"; //HW3-L2
+import { Container, Row, Col, Form, Button, Alert, Modal} from "react-bootstrap"; //HW3-L3/4
 import PeopleData from "./components/PeopleData"; // Import People Array
 import ClassmateCard from "./components/ClassMateCard"; // Import ClassMateCard component
+import ClassmateTable from "./components/ClassmateTable";
 
 // Main App Component
 function App() {
-  // Use state to manage people data and form inputs
-  const [people, setPeople] = useState(PeopleData);
+  //HW3-L2
+  // Initialize people state with a unique ID and likes count for each person
+  const [people, setPeople] = useState(
+    PeopleData.map(person => ({ ...person, id: Date.now() + Math.random(), likes: 0 }))
+  );
+  // State for input form fields
   const [name, setName] = useState("");
   const [favoriteColor, setFavoriteColor] = useState("");
   const [favoriteFood, setFavoriteFood] = useState("");
   const [error, setError] = useState("");
+  // State for editing classmates
+  const [editingPerson, setEditingPerson] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false);
 
-  // Function to handle form submission
+  // Function to add a new classmate
   const handleAddPerson = (e) => {
     e.preventDefault();
-
     if (!name || !favoriteColor || !favoriteFood) {
       setError("All fields are required!");
       return;
     }
-
-    // Add new classmate to the list
-    const newPerson = { name, favoriteColor, favoriteFood };
+    const newPerson = { id: Date.now().toString(), name, favoriteColor, favoriteFood ,likes: 0};
     setPeople([...people, newPerson]);
-
-    // Clear the input fields and error message
-    setName("");
+    setName(""); // Clear the input fields and error message
     setFavoriteColor("");
     setFavoriteFood("");
     setError("");
   };
 
-  // return (
-  //   <Container className="mt-4">
-  //     {/* Page Heading */}
-  //     <h2 className="text-left">My Classmates</h2>
+  // HW3-L3/4 Handle Profile Deletion and Edit
+  const handleDelete = (id) => {
+    setPeople((prevPeople) => prevPeople.filter((person) => person.id !== id));
+  };
 
-  //     {/* Create a Bootstrap Row for layout */}
-  //     <Row className="justify-content-center">
-  //       {/* Map through the People array and generate a card for each classmate */}
-  //       {PeopleData.map((person, index) => (
-  //         <Col key={index} xs={12}>
-  //           {/* Render the ClassmateCard component for each person */}
-  //           <ClassmateCard person={person} />
-  //         </Col>
-  //       ))}
-  //     </Row>
-  //   </Container>
-  // );
+  const handleEdit = (id) => {
+    const personToEdit = people.find((person) => person.id === id);
+    if (personToEdit) {
+      setEditingPerson({ ...personToEdit }); // Correctly set the specific person
+      setShowEditModal(true);
+      setError(""); // Clear any previous error messages
+    }
+  };
+
+  // HW3-L3/4 Handle Updating Profile
+  const handleUpdateProfile = () => {
+    if (!editingPerson.name || !editingPerson.favoriteColor || !editingPerson.favoriteFood) {
+      setError("All fields are required!");
+      return;
+    }
+    setPeople((prevPeople) =>
+      prevPeople.map((person) => person.id === editingPerson.id ? { ...person, name: editingPerson.name, favoriteColor: editingPerson.favoriteColor, favoriteFood: editingPerson.favoriteFood } : person
+      ));
+    setShowEditModal(false);
+    setError(""); 
+  };
+
+  const handleLike = (id) => {
+    setPeople((prevPeople) =>
+      prevPeople.map((person) =>
+      person.id === id ? { ...person, likes: (person.likes || 0) + 1  } : person
+      ));
+  };
+
   return (
     <Container className="mt-4">
-      {/* Page Heading */}
+      {/* HW3-L1 Page Heading */}
       <h2 className="text-left">My Classmates</h2>
 
-      {/* Form to Add New Classmate */}
+      {/* HW3-L2 Form to Add New Classmate */}
       <Form onSubmit={handleAddPerson} className="mb-4 p-3 border rounded bg-light">
+        {/* Show error message */}
         {error && <Alert variant="danger">{error}</Alert>}
         <Form.Group controlId="name">
           <Form.Label>Name:</Form.Label>
@@ -80,15 +99,53 @@ function App() {
 
         <Button type="submit" variant="primary" className="mt-3">Add Classmate</Button>
       </Form>
-
-      {/* Display Classmates */}
+      {/* Display People Data as Cards */}
       <Row className="justify-content-center">
         {people.map((person, index) => (
           <Col key={index} xs={12}>
-            <ClassmateCard person={person} />
+            <ClassmateCard
+              person={person} 
+              likes={person.likes} 
+              onLike={() => handleLike(person.id)} 
+            />
           </Col>
         ))}
       </Row>
+
+
+      {/* HW3-L3/4 Display Classmates in a Table */}
+      <ClassmateTable people={people} onEdit={(id) => handleEdit(id)} onDelete={handleDelete}/>
+
+      {/* Edit Modal */}
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Classmate</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {/* Show error message */}
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form>
+            <Form.Group >
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" value={editingPerson?.name} onChange={(e) => setEditingPerson({...editingPerson, name: e.target.value})}/>
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Favorite Color</Form.Label>
+              <Form.Control type="text" value={editingPerson?.favoriteColor} onChange={(e) => setEditingPerson({...editingPerson, favoriteColor: e.target.value})}/>
+            </Form.Group>
+
+            <Form.Group >
+              <Form.Label>Favorite Food</Form.Label>
+              <Form.Control type="text" value={editingPerson?.favoriteFood} onChange={(e) => setEditingPerson({...editingPerson, favoriteFood: e.target.value})}/>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>Cancel</Button>
+          <Button variant="primary" onClick={handleUpdateProfile}>Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
     </Container>
   );
 }
@@ -105,7 +162,6 @@ mb-4 → Adds bottom margin for spacing between form and list.
 p-3 → Adds padding inside the form.
 border rounded → Adds a border and rounded corners.
 bg-light → Sets a light gray background.
-
 Row className="justify-content-center" → Centers the classmates list.
 
 */
